@@ -38,6 +38,7 @@
 		<jakarta-validation.version>3.1.0</jakarta-validation.version>
 		<jsonwebtoken.version>0.12.6</jsonwebtoken.version>
 		<springdoc.version>2.0.2</springdoc.version>
+		<loki4j.version>1.4.1</loki4j.version>
 	</properties>
 
 	<dependencies>
@@ -113,7 +114,11 @@
 			<scope>runtime</scope>
 		</dependency>
 
-
+		<dependency>
+			<groupId>com.github.loki4j</groupId>
+			<artifactId>loki-logback-appender</artifactId>
+			<version>${loki4j.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

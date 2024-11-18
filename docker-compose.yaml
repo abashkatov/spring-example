@@ -9,3 +9,24 @@ services:
       POSTGRES_USER: postgres
     volumes:
       - ./var/db-data:/var/lib/postgresql/data:rw
+  loki:
+#    hostname: loki
+    image: grafana/loki:latest
+    environment:
+      TZ: ${SYSTEM_TIMEZONE:-Europe/Moscow}
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  grafana:
+#    hostname: grafana
+    environment:
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      # Включим доступ без авторизации
+      - GF_AUTH_ANONYMOUS_ENABLED=true # Не используйте **ANONYMOUS** настройки в проде
+      # Дадим права администратора при анонимном входе
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - TZ=${SYSTEM_TIMEZONE:-Europe/Moscow}
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
